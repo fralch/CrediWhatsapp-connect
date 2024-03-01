@@ -1,5 +1,4 @@
 const express = require('express');
-const multer = require('multer');
 const { launchBrowser, whatsappClient } = require('whatsapp-connect');
 const app = express();
 
@@ -33,7 +32,6 @@ app.post('/api/whatsapp',  async (req, res) => {
     const message = req.body.message;
     const phone = req.body.phone;
     const targetNumber = `51${phone}@c.us`;
-
 
     try {
         const msg = await SendMsg(targetNumber, message);
