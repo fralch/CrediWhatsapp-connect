@@ -43,6 +43,17 @@ const SendMsg = async (targetNumber, message, media) => {
         throw error;
     }
 };
+const SendMsgJson = async (targetNumber, message) => {
+    console.log('Sending message json...');
+    try {
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Message sent successfully');
+        return true;
+    } catch (error) {
+        console.error('Error sending message:', error);
+        throw error;
+    }
+};
 
 app.get('/', (req, res) => {
     res.send('Hello World local!');
@@ -73,6 +84,19 @@ app.post('/api/whatsapp', upload.single('imagen'), async (req, res) => {
     try {
         const msg = await SendMsg(targetNumber, message, media);
         res.json(msg);
+    } catch (error) {
+        res.status(500).json({ error: 'Error sending message' });
+    }
+});
+
+app.post('/api/whatsapp/json',  async (req, res) => {
+    const message = req.body.message;
+    const phone = req.body.phone;
+    const targetNumber = `51${phone}@c.us`;
+
+    try {
+        const msg = await SendMsgJson(targetNumber, message);
+        res.json(msg? { message: 'Message sent successfully' } : { message: 'Error sending message' });
     } catch (error) {
         res.status(500).json({ error: 'Error sending message' });
     }
