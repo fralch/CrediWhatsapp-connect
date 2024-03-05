@@ -49,6 +49,15 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/whatsapp', upload.single('imagen'), async (req, res) => {
+    if(!req.file){
+        res.status(400).json({ error: 'La imagen es requerida' });
+        return false;
+    }
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (!allowedMimeTypes.includes(req.file.mimetype)) {
+        res.status(400).json({ error: 'La imagen debe ser de tipo .jpg o .png' });
+        return false;
+    }
     const message = req.body.message;
     const phone = req.body.phone;
     const isValid = validar(message, phone);
