@@ -92,6 +92,12 @@ app.post('/api/whatsapp', upload.single('imagen'), async (req, res) => {
 app.post('/api/whatsapp/json',  async (req, res) => {
     const message = req.body.message;
     const phone = req.body.phone;
+     const isValid = validar(message, phone);
+    if (isValid?.status  === "error") {
+        res.status(400).json({ error: isValid });
+        return false;
+    }
+
     const targetNumber = `51${phone}@c.us`;
 
     try {
