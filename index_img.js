@@ -56,10 +56,10 @@ const SendMsgJson = async (targetNumber, message) => {
 };
 
 app.get('/', (req, res) => {
-    res.send('Hello World local!');
+    res.send('Hello World whatsapp-connect!');
 });
 
-app.post('/api/whatsapp', upload.single('imagen'), async (req, res) => {
+app.post('/api/whatsapp/text-image', upload.single('imagen'), async (req, res) => {
     if(!req.file){
         res.status(400).json({ error: 'La imagen es requerida' });
         return false;
@@ -89,7 +89,7 @@ app.post('/api/whatsapp', upload.single('imagen'), async (req, res) => {
     }
 });
 
-app.post('/api/whatsapp/json',  async (req, res) => {
+app.post('/api/whatsapp/text',  async (req, res) => {
     const message = req.body.message;
     const phone = req.body.phone;
      const isValid = validar(message, phone);
@@ -108,7 +108,7 @@ app.post('/api/whatsapp/json',  async (req, res) => {
     }
 });
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`REST API server listening on port ${PORT}`);
 });

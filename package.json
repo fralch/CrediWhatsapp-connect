@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "whatsapp-connect": "^1.0.4"
+    "whatsapp-connect": "^1.0.6"
   }
 }
