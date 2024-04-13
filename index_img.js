@@ -108,7 +108,7 @@ app.post('/api/whatsapp/text',  async (req, res) => {
     }
 });
 
-const PORT = 3001;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`REST API server listening on port ${PORT}`);
 });
