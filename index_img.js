@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
     res.send('Hello World whatsapp-connect!');
 });
 
-app.post('/api/whatsapp/text-image', upload.single('imagen'), async (req, res) => {
+app.post('/api/whatsapp/text-image', upload.single('image'), async (req, res) => {
     if(!req.file){
         res.status(400).json({ error: 'La imagen es requerida' });
         return false;
