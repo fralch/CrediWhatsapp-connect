@@ -125,6 +125,13 @@ app.post('/api/whatsapp/text',  async (req, res) => {
         }
         res.json(msg? { message: 'Message sent successfully' } : { message: 'Error sending message' });
     } catch (error) {
+        fs.appendFileSync('log.json', JSON.stringify({
+            "phone": phone,
+            "message": message,
+            "status": "error",
+            "date": new Date().toISOString()
+          }) + '\n');
+          
         res.status(500).json({ error: 'Error sending message' });
     }
 });
